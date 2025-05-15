@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block title %} MusicApp | {{ title }} {% endblock title %}
+{% block header %}
+<style>
+    /* Custom CSS */
+    body {
+        background-color: #000000; /* Set background color to black */
+    }
+
+    .sign-in-container {
+        background-color: #1e1e1e; /* Set container background color to dark shade */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add box shadow for container */
+    }
+
+    .or-separator {
+        margin: 20px 0 10px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+
+    .or-separator i {
+        padding: 0 10px;
+        background: #f7f7f7;
+        position: relative;
+        top: -11px;
+        z-index: 1;
+    }
+
+    .sign-in-button {
+        margin-top: 10px;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .sign-in-button:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .sign-up-link {
+        color: #007bff;
+    }
+
+    .sign-up-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    /* Additional CSS for sign-up block */
+    .sign-up-block {
+        background-color: #1e1e1e; /* Set background color for sign-up block */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add box shadow for block */
+    }
+
+    .sign-up-heading {
+        color: #ffffff; /* Set text color to white */
+        text-align: center;
+    }
+
+    .sign-up-button {
+        margin-top: 10px;
+        background-color: #28a745; /* Set button background color */
+        border-color: #28a745; /* Set button border color */
+        width: 100%; /* Set button width to 100% */
+    }
+
+    .sign-up-button:hover {
+        background-color: #218838; /* Set button hover background color */
+        border-color: #1e7e34; /* Set button hover border color */
+    }
+
+    .log-in-link {
+        color: #ffffff; /* Set link text color to white */
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .log-in-link:hover {
+        color: #007bff; /* Set link hover color */
+        text-decoration: underline; /* Add underline on hover */
+    }
+</style>
+{% endblock header %}
+
+{% block body %}
+<main role="main" class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <div class="sign-in-container">
+        <h1 class="text-center">Sign In</h1>
+        <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-outline-dark btn-block">
+          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+          Sign in with Google
+        </a>
+        <div class="or-separator"><i>or</i></div>
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn-success btn-block sign-in-button" type="submit">Log In</button>
+        </form>
+        <p class="text-center mt-3">Don't have an account? Please <a href="{% url 'signup' %}" class="sign-up-link">sign up</a> first.</p>
+      </div>
+
+      <!-- Sign-up Block -->
+      <div class="sign-up-block">
+        <h2 class="sign-up-heading">Sign Up</h2>
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn-success sign-up-button" type="submit">Sign Up</button>
+        </form>
+        <p class="log-in-link">Already have an account? Please <a href="{% url 'login' %}">log in</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock body %}

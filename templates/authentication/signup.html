@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block title %} MusicApp | {{ title }} {% endblock title %}
+{% block header %}
+<style>
+    /* Custom CSS */
+    body {
+        background-color: #000000; /* Set background color to black */
+    }
+
+    .sign-up-container {
+        background-color: #1e1e1e; /* Set container background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add box shadow for container */
+    }
+
+    .or-separator {
+        margin: 20px 0 10px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+
+    .or-separator i {
+        padding: 0 10px;
+        background: #f7f7f7;
+        position: relative;
+        top: -11px;
+        z-index: 1;
+    }
+
+    .sign-up-button {
+        margin-top: 10px;
+        background-color: #28a745; /* Set button background color */
+        border-color: #28a745; /* Set button border color */
+    }
+
+    .sign-up-button:hover {
+        background-color: #218838; /* Set button hover background color */
+        border-color: #1e7e34; /* Set button hover border color */
+    }
+
+    .log-in-link {
+        color: #007bff; /* Set link text color */
+    }
+
+    .log-in-link:hover {
+        color: #0056b3; /* Set link hover color */
+        text-decoration: underline; /* Add underline on hover */
+    }
+</style>
+{% endblock header %}
+{% block body %}
+<main role="main" class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="sign-up-container">
+                <h1 class="text-center" style="color: #ffffff;">Sign Up</h1> <!-- Set text color to white -->
+                <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-outline-dark btn-block">
+                    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt= "Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                    Sign up with Google
+                </a>
+                <div class="or-separator"><i>or</i></div>
+                <form method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-success btn-block sign-up-button" type="submit">Sign Up</button>
+                </form>
+                <br>
+                <p class="text-center mt-3" style="color: #ffffff;">Already have an account? Please <a href="{% url 'login' %}" class="log-in-link">log in</a>.</p> <!-- Set text color to white -->
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}
